@@ -9,13 +9,13 @@ import (
 // MapLookup is a structure that implements the project.EnvironmentLookup interface.
 // It holds a map of variables where to lookup environment values.
 type MapLookup struct {
-	vars map[string]string
+	Vars map[string]string
 }
 
 // Lookup creates a string slice of string containing a "docker-friendly" environment string
 // in the form of 'key=value'. It gets environment values from the vars map.
 func (l *MapLookup) Lookup(key string, config *config.ServiceConfig) []string {
-	ret := l.vars[key]
+	ret := l.Vars[key]
 	if ret == "" {
 		return []string{}
 	}
