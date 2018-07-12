@@ -6,7 +6,7 @@ import (
 
 func TestMapLookup(t *testing.T) {
 	mapLookup := &MapLookup{
-		vars: map[string]string{"VAR": "VALUE"},
+		Vars: map[string]string{"VAR": "VALUE"},
 	}
 
 	envs := mapLookup.Lookup("VAR", nil)
