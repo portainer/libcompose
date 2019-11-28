@@ -3,7 +3,6 @@ package docker
 import (
 	"golang.org/x/net/context"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/portainer/libcompose/config"
@@ -15,6 +14,7 @@ import (
 	"github.com/portainer/libcompose/docker/volume"
 	"github.com/portainer/libcompose/labels"
 	"github.com/portainer/libcompose/project"
+	"github.com/sirupsen/logrus"
 )
 
 // NewProject creates a Project with the specified context.

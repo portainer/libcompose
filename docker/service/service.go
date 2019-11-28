@@ -7,7 +7,6 @@ import (
 
 	"golang.org/x/net/context"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/network"
@@ -26,6 +25,7 @@ import (
 	"github.com/portainer/libcompose/project/options"
 	"github.com/portainer/libcompose/utils"
 	"github.com/portainer/libcompose/yaml"
+	"github.com/sirupsen/logrus"
 )
 
 // Service is a project.Service implementations.
@@ -257,7 +257,7 @@ func (s *Service) Run(ctx context.Context, commandParts []string, options option
 		return -1, err
 	}
 
-	configOverride := &config.ServiceConfig{Command: commandParts, Tty: true, StdinOpen: true}
+	configOverride := &config.ServiceConfig{Command: commandParts, Tty: !options.DisableTty, StdinOpen: !options.DisableTty}
 
 	c, err := s.createContainer(ctx, namer, "", configOverride, true)
 	if err != nil {
@@ -411,6 +411,20 @@ func (s *Service) NetworkConnect(ctx context.Context, c *container.Container, ne
 		aliases = []string{s.Name()}
 	}
 	aliases = append(aliases, net.Aliases...)
+	if len(net.Aliases) >= 1 {
+		logrus.Infof("connect")
+		client.NetworkConnect(ctx, net.RealName, containerID, &network.EndpointSettings{
+			Aliases:   aliases,
+			Links:     links,
+			IPAddress: net.IPv4Address,
+			IPAMConfig: &network.EndpointIPAMConfig{
+				IPv4Address: net.IPv4Address,
+				IPv6Address: net.IPv6Address,
+			},
+		})
+		logrus.Infof("disconnect")
+		client.NetworkDisconnect(ctx, net.RealName, containerID, true)
+	}
 	return client.NetworkConnect(ctx, net.RealName, containerID, &network.EndpointSettings{
 		Aliases:   aliases,
 		Links:     links,
@@ -488,7 +502,7 @@ func (s *Service) OutOfSync(ctx context.Context, c *container.Container) (bool, 
 
 	image, err := image.InspectImage(ctx, s.clientFactory.Create(s), c.ImageConfig())
 	if err != nil {
-		if client.IsErrImageNotFound(err) {
+		if client.IsErrNotFound(err) {
 			logrus.Debugf("Image %s do not exist, do not know if it's out of sync", c.Image())
 			return false, nil
 		}

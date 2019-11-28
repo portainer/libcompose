@@ -51,13 +51,13 @@ func (v *Volume) Remove(ctx context.Context) error {
 func (v *Volume) EnsureItExists(ctx context.Context) error {
 	volumeResource, err := v.Inspect(ctx)
 	if v.external {
-		if client.IsErrVolumeNotFound(err) {
+		if client.IsErrNotFound(err) {
 			// FIXME(shouze) introduce some libcompose error type
 			return fmt.Errorf("Volume %s declared as external, but could not be found. Please create the volume manually using docker volume create %s and try again", v.name, v.name)
 		}
 		return err
 	}
-	if err != nil && client.IsErrVolumeNotFound(err) {
+	if err != nil && client.IsErrNotFound(err) {
 		return v.create(ctx)
 	}
 	if volumeResource.Driver != v.driver {
@@ -68,7 +68,7 @@ func (v *Volume) EnsureItExists(ctx context.Context) error {
 
 func (v *Volume) create(ctx context.Context) error {
 	fmt.Printf("Creating volume %q with driver %q\n", v.fullName(), v.driver)
-	_, err := v.client.VolumeCreate(ctx, volume.VolumesCreateBody{
+	_, err := v.client.VolumeCreate(ctx, volume.VolumeCreateBody{
 		Name:       v.fullName(),
 		Driver:     v.driver,
 		DriverOpts: v.driverOptions,

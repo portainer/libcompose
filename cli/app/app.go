@@ -10,10 +10,10 @@ import (
 
 	"golang.org/x/net/context"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/portainer/libcompose/project"
 	"github.com/portainer/libcompose/project/options"
 	"github.com/portainer/libcompose/version"
+	"github.com/sirupsen/logrus"
 	"github.com/urfave/cli"
 )
 

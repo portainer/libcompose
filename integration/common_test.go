@@ -11,12 +11,12 @@ import (
 
 	"golang.org/x/net/context"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
 	lclient "github.com/portainer/libcompose/docker/client"
 	"github.com/portainer/libcompose/docker/container"
 	"github.com/portainer/libcompose/labels"
+	"github.com/sirupsen/logrus"
 
 	. "gopkg.in/check.v1"
 )
