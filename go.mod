@@ -6,6 +6,7 @@ require (
 	github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78 // indirect
 	github.com/Microsoft/go-winio v0.3.8 // indirect
 	github.com/Microsoft/hcsshim v0.8.6 // indirect
+	github.com/containerd/containerd v1.3.1 // indirect
 	github.com/containerd/continuity v0.0.0-20190426062206-aaeac12a7ffc // indirect
 	github.com/docker/cli v0.0.0-20191105005515-99c5edceb48d
 	github.com/docker/distribution v2.7.1+incompatible
@@ -38,4 +39,4 @@ require (
 	gotest.tools v2.2.0+incompatible // indirect
 )
 
-replace github.com/docker/docker => github.com/docker/engine v0.0.0-20190725163905-fa8dd90ceb7b
+replace github.com/docker/docker => github.com/docker/engine v1.4.2-0.20191113042239-ea84732a7725
