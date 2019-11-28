@@ -7,7 +7,7 @@ require (
 	github.com/Microsoft/go-winio v0.3.8 // indirect
 	github.com/Microsoft/hcsshim v0.8.6 // indirect
 	github.com/containerd/continuity v0.0.0-20190426062206-aaeac12a7ffc // indirect
-	github.com/docker/cli v0.0.0-20190711175710-5b38d82aa076
+	github.com/docker/cli v0.0.0-20191105005515-99c5edceb48d
 	github.com/docker/distribution v2.7.1+incompatible
 	github.com/docker/docker v0.0.0-00010101000000-000000000000
 	github.com/docker/docker-credential-helpers v0.6.3 // indirect
@@ -28,9 +28,7 @@ require (
 	github.com/sirupsen/logrus v1.2.0
 	github.com/stretchr/testify v1.3.0
 	github.com/urfave/cli v1.21.0
-	github.com/xeipuuv/gojsonpointer v0.0.0-20180127040702-4e3ac2762d5f // indirect
-	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
-	github.com/xeipuuv/gojsonschema v1.1.0
+	github.com/xeipuuv/gojsonschema v1.2.0
 	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
 	golang.org/x/net v0.0.0-20190613194153-d28f0bde5980
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4 // indirect
