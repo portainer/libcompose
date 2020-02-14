@@ -3,6 +3,7 @@ package config
 import (
 	"bufio"
 	"bytes"
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -12,7 +13,6 @@ import (
 	"github.com/docker/docker/pkg/urlutil"
 	"github.com/portainer/libcompose/utils"
 	composeYaml "github.com/portainer/libcompose/yaml"
-	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v2"
 )
 
@@ -135,7 +135,7 @@ func Merge(existingServices *ServiceConfigs, environmentLookup EnvironmentLookup
 	var serviceConfigs map[string]*ServiceConfig
 	switch major {
 	case 3:
-		return "", nil, nil, nil, errors.New("Compose file version 3 is not supported")
+		return "", nil, nil, nil, errors.New("compose file version 3 is not supported")
 	case 2:
 		var err error
 		serviceConfigs, err = MergeServicesV2(existingServices, environmentLookup, resourceLookup, file, baseRawServices, options)
@@ -227,10 +227,6 @@ func readEnvFile(resourceLookup ResourceLookup, inFile string, serviceData RawSe
 	for i := len(envFiles) - 1; i >= 0; i-- {
 		envFile := envFiles[i]
 		content, _, err := resourceLookup.Lookup(envFile, inFile)
-		if err != nil {
-			return nil, err
-		}
-
 		if err != nil {
 			return nil, err
 		}
