@@ -24,7 +24,6 @@ require (
 	github.com/opencontainers/image-spec v0.0.0-20170515205857-f03dbe35d449 // indirect
 	github.com/opencontainers/runc v0.0.0-20161109192122-51371867a01c // indirect
 	github.com/pkg/errors v0.8.0
-	github.com/portainer/libcompose v0.5.0
 	github.com/prometheus/client_golang v1.1.0 // indirect
 	github.com/sirupsen/logrus v1.2.0
 	github.com/stretchr/testify v1.3.0
