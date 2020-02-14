@@ -135,7 +135,7 @@ func Merge(existingServices *ServiceConfigs, environmentLookup EnvironmentLookup
 	var serviceConfigs map[string]*ServiceConfig
 	switch major {
 	case 3:
-		logrus.Fatal("Note: Compose file version 3 is not yet implemented")
+		return "", nil, nil, nil, errors.New("Compose file version 3 is not supported")
 	case 2:
 		var err error
 		serviceConfigs, err = MergeServicesV2(existingServices, environmentLookup, resourceLookup, file, baseRawServices, options)
